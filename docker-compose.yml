@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    build: web/.
+    build: backend/.
     ports:
       - "3000:3000"
   pgdb:

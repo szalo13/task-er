@@ -8,6 +8,10 @@ COPY package.json .
 # For npm@5 or later, copy package-lock.json as well
 # COPY package.json package-lock.json ./
 
+# installing vim
+RUN apt-get update
+RUN apt-get install vim
+
 RUN npm install
 
 # Bundle app source

@@ -5,6 +5,8 @@ services:
     build: backend/.
     ports:
       - "3000:3000"
+    volumes:
+      - ./backend:/usr/src/app
   pgdb:
     build: database/.
     ports:

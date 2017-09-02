@@ -10,7 +10,7 @@ COPY package.json .
 
 # installing vim
 RUN apt-get update
-RUN apt-get install vim
+RUN apt-get -y install vim 
 
 RUN npm install
 

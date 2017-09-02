@@ -1,5 +1,5 @@
 const pg = require('pg');
-const connectionString = process.ENV.DATABASE_URL || 'postgres://localhost:5432/task-er';
+const connectionString = process.ENV.DATABASE_URL || 'postgres://docker:docker@//pgdb:5432/task-er';
 
 const client = new pg.Client(connectionString);
 client.connect();

@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pg = require('pg');
 const path = require('path');
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/task-er';
-const pool = new pg.Pool();
+const connectionString = 'postgres://docker:docker@pgdb:5432/task-er';
 
 /* GET home page. */
 router.get('/index', function(req, res, next) {
@@ -13,6 +12,30 @@ router.get('/index', function(req, res, next) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+/* GET home page. */
+router.get('/details', function(req, res, next) {
+  pg.connect(connectionString, (err, client, done) => {
+    const results = [];
+      res.render('index', { title: err});
+
+      if (err) {
+        done();
+        return res.status(500).json({success: false, data: err});
+      }
+
+      client.query('SELECT * FROM items');
+
+      query.on('row', (row) => {
+        results.push(row);
+      });
+
+      query.on('end', () => {
+        done();
+        return res.json(results)
+      });
+  });
 });
 
 router.post('/api/tasks', (req, res, next) => {

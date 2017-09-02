@@ -5,6 +5,8 @@ services:
     build: backend/.
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://docker:docker@pgdb:5432/task-er
     volumes:
       - ./backend:/usr/src/app
   pgdb:

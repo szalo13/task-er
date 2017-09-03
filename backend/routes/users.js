@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.render('users', {message: 'not logged in'});
+});
+
+router.post('/signup', function(req, res, next) {
+  res.render('users', {message: 'Authenticated'});
 });
 
 module.exports = router;

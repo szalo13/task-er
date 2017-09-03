@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= message
+  p Welcome to #{message}
+  form(method='POST' action='/users/signup')
+
+    label Email
+    input(placeholder= message name='email')
+
+    label Password
+    input(placeholder= 'Password' name='password')
+
+    button(type= 'submit') Submit

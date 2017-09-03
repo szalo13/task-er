@@ -18,14 +18,12 @@ router.get('/', function(req, res, next) {
 router.get('/details', function(req, res, next) {
   pg.connect(connectionString, (err, client, done) => {
     const results = [];
-      res.render('index', { title: err});
+    const query = client.query('SELECT * FROM items');
 
       if (err) {
         done();
         return res.status(500).json({success: false, data: err});
       }
-
-      client.query('SELECT * FROM items');
 
       query.on('row', (row) => {
         results.push(row);

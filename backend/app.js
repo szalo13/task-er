@@ -11,6 +11,9 @@ var bodyParser = require('body-parser');
 // Create, sign and verify token
 var jwt = require('jsonwebtoken');
 
+// Loading environment variables
+var dotenv = require('dotenv').config();
+
 // Routes src
 var index = require('./routes/index');
 var users = require('./routes/users');

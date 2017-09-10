@@ -4,7 +4,31 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+
 var passport = require('passport');
+var Auth0Strategy = require('passport-auth0');
+var Auth0Lock =require('auth0-lock');
+
+// Loading environment variables
+var dotenv = require('dotenv').config();
+
+var strategy = new Auth0Strategy({
+  domain:           process.env.AUTH0_DOMAIN,
+  clientID:         process.env.AUTH0_CLIENT_ID,
+  clientSecret:     process.env.AUTH0_CLIENT_SECRET,
+  callbackURL:      process.env.AUTH0_CALLBACK_URL,
+}, function(accessToken, refreshToken, extraParams, profile, done) {
+  return (null, profile);
+});
+passport.use(strategy);
+// Methods allow us to get user data one they are logged in.
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +45,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  // Here we are creating unique session identifier
+  secret: 'szalo',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);

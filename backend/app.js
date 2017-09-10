@@ -1,10 +1,17 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
+
+// Loging messages to console to see what is happening
 var logger = require('morgan');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Create, sign and verify token
+var jwt = require('jsonwebtoken');
+
+// Routes src
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -22,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Using routes
 app.use('/', index);
 app.use('/users', users);
 

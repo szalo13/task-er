@@ -1,11 +1,12 @@
 var SchemaObject = require('schema-object');
 
 var User = new SchemaObject({
-  nickname: String,
+  username: String,
   email: String,
+  password: String,
   firstName: String,
   lastName: String,
-  birthDate: Date,
+  birthday: Date,
 });
 
 module.exports = User;

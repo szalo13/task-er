@@ -4,10 +4,7 @@ module.exports = {
 
   development: {
     client: 'postgresql',
-    connection: process.env.DATABASE_KNEX_URL,
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+    connection: 'postgres://docker:docker@localhost:5432/task-er',
   },
 
   staging: {
